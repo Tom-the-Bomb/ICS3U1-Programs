@@ -25,7 +25,7 @@ public class MovingBall extends JPanel implements ActionListener {
     
     public void paint(Graphics g) {
         super.paint(g);
-        g.setColor(new Color(10, 10, 10));
+        g.setColor(Color.black);
         g.drawRect(0, 0, width, height);
         
         g.setColor(Color.red);
