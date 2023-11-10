@@ -1,18 +1,18 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class House extends Canvas {
+public class HouseDraw extends Canvas {
     private static int width = 1518;
     private static int height = 850;
     public static void main(String[] args) {
-        House house = new House();
+        HouseDraw comp = new HouseDraw();
         JFrame frame = new JFrame("House");
 
         frame.setSize(width, height);
         frame.getContentPane()
             .setBackground(Color.white);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(house);
+        frame.add(comp);
         frame.setVisible(true);
     }
 

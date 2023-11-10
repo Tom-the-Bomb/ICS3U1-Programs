@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MovingBall extends JPanel implements ActionListener {
+public class BouncingBall extends JPanel implements ActionListener {
     int x = 0;
     int y = 0;
     Timer timer = new Timer(10, this);
@@ -12,15 +12,15 @@ public class MovingBall extends JPanel implements ActionListener {
     
     static int width = 500; // width of box
     static int height = 400; // height of box
-    static int rad = 50; // radius of ball
+    static int diam = 50; // diameter of ball
     
     public static void main(String[] args) {
-        MovingBall movingBall = new MovingBall();
+        BouncingBall comp = new BouncingBall();
         JFrame frame = new JFrame("Animation");
         frame.setSize(width, height);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(movingBall);
+        frame.add(comp);
     }
     
     public void paint(Graphics g) {
@@ -29,7 +29,7 @@ public class MovingBall extends JPanel implements ActionListener {
         g.drawRect(0, 0, width, height);
         
         g.setColor(Color.red);
-        g.fillOval(x, y, rad, rad);
+        g.fillOval(x, y, diam, diam);
         timer.start();
     }
     
@@ -38,10 +38,10 @@ public class MovingBall extends JPanel implements ActionListener {
         y += velY;
         repaint();
         
-        if (x >= width - rad || x <= 0) {
+        if (x >= width - diam || x <= 0) {
             velX *= -1;
         }
-        if (y >= height - rad || y <= 0) {
+        if (y >= height - diam || y <= 0) {
             velY *= -1;
         }
     }

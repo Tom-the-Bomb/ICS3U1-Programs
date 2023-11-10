@@ -1,18 +1,18 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Face extends Canvas {
+public class FaceDraw extends Canvas {
     private static int width = 600;
     private static int height = 850;
     public static void main(String[] args) {
-        Face face = new Face();
+        FaceDraw comp = new FaceDraw();
         JFrame frame = new JFrame("House");
 
         frame.setSize(width, height);
         frame.getContentPane()
             .setBackground(Color.white);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(face);
+        frame.add(comp);
         frame.setVisible(true);
     }
 
@@ -37,7 +37,7 @@ public class Face extends Canvas {
         g.fillOval(width / 2 + 60, height - 540, 100, 80);
 
         g.setColor(Color.black);
-        g.drawString("Face", width / 2 - 20, 40);
+        g.drawString("FaceDraw", width / 2 - 20, 40);
         // face
         g.drawOval(20, 50, width - 40, height - 50);
         // ears
