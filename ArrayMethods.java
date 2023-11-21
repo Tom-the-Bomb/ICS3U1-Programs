@@ -4,34 +4,34 @@ public class ArrayMethods
 {
     /* Pushes `element` to the end of the provided array */
     public static<T> T[] pushBack(T[] arr, T element) {
-        T[] new_arr = Arrays.copyOf(arr, arr.length + 1);
-        new_arr[arr.length] = element;
-        return new_arr;
+        T[] newArr = Arrays.copyOf(arr, arr.length + 1);
+        newArr[arr.length] = element;
+        return newArr;
     }
     
     /* Pushes `element` to the start of the provided array */
     public static<T> T[] pushFront(T[] arr, T element) {
-        T[] new_arr = Arrays.copyOf(arr, arr.length + 1);
+        T[] newArr = Arrays.copyOf(arr, arr.length + 1);
         
-        new_arr[0] = element;
+        newArr[0] = element;
         for (int i = 0; i < arr.length; i++) {
-            new_arr[i + 1] = arr[i];
+            newArr[i + 1] = arr[i];
         }
-        return new_arr;
+        return newArr;
     }
     
     /* Inserts `element` into index `index` of the array */
     public static<T> T[] insert(T[] arr, int index, T element) {
-        T[] new_arr = Arrays.copyOf(arr, arr.length + 1);
+        T[] newArr = Arrays.copyOf(arr, arr.length + 1);
         
         for (int i = 0; i < index; i++) {
-            new_arr[i] = arr[i];
+            newArr[i] = arr[i];
         }
-        new_arr[index] = element;
+        newArr[index] = element;
         for (int i = index; i < arr.length; i++) {
-            new_arr[i + 1] = arr[i];
+            newArr[i + 1] = arr[i];
         }
-        return new_arr;
+        return newArr;
     }
     
     /* Inserts `element` into index `index` of the array */
@@ -54,6 +54,16 @@ public class ArrayMethods
         return arr;
     }
     
+    /* Returns the index of an element in an array, returns -1 if element does not exist */
+    public static<T> int indexOf(T[] arr, T target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(target)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     /* Prints out an array in a formatted manner */
     public static<T> void printArr(T[] arr) {
         System.out.println(Arrays.toString(arr));
@@ -71,5 +81,8 @@ public class ArrayMethods
         
         Integer[] arr4 = {4, 2, 5, 1};
         printArr(bubbleSort(arr4));
+        
+        String[] arr5 = {"a", "b", "c", "d"};
+        System.out.println(indexOf(arr5, "c"));
     }
 }
