@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 
 public class ArrayMethods
@@ -64,6 +65,15 @@ public class ArrayMethods
         return -1;
     }
     
+    /* Reverse the array */
+    public static<T> T[] reverse(T[] arr) {
+        T[] newArr = Arrays.copyOf(arr, arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[arr.length - i - 1];
+        }
+        return newArr;
+    }
+    
     /* Prints out an array in a formatted manner */
     public static<T> void printArr(T[] arr) {
         System.out.println(Arrays.toString(arr));
@@ -84,5 +94,8 @@ public class ArrayMethods
         
         String[] arr5 = {"a", "b", "c", "d"};
         System.out.println(indexOf(arr5, "c"));
+        
+        String[] arr6 = {"a", "b", "c", "d"};
+        printArr(reverse(arr6));
     }
 }
