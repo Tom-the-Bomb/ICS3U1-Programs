@@ -2,12 +2,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
 
-public class SimpleCalculator implements ActionListener
-{
+public class SimpleCalculator implements ActionListener {
     Frame frame = new Frame("Simple Calculator");
 
-    Label label1 = new Label("Num 1: a");
-    Label label2 = new Label("Num 2: b");
+    Label label1 = new Label("Num 1: (a)");
+    Label label2 = new Label("Num 2: (b)");
     Label label3 = new Label("Result");
 
     TextField num1 = new TextField();
@@ -18,7 +17,7 @@ public class SimpleCalculator implements ActionListener
     Button minus = new Button("-");
     Button times = new Button("×");
     Button divide = new Button("÷");
-    Button cancel = new Button("Cancel");
+    Button resetButton = new Button("CE");
 
     Button pow = new Button("a^b");
     Button root = new Button("a√b");
@@ -27,10 +26,32 @@ public class SimpleCalculator implements ActionListener
     Button lcm = new Button("lcm");
 
     Button mod = new Button("mod");
-    Button nPr = new Button("nPr(a, b)");
-    Button nCr = new Button("nCr(a, b)");
+    Button nPr = new Button("nPr");
+    Button nCr = new Button("nCr");
+    
+    Button[][] buttons = {
+        {plus, minus, times, divide, resetButton},
+        {pow, root, log, gcd, lcm},
+        {mod, nPr, nCr},
+    };
+    
+    static final int buttonWidth = 60;
+    static final int buttonHeight = 20;
+    static final int gap = 10;
 
     public SimpleCalculator() {
+        int x = 50, y = 250;
+        for (Button[] row : buttons) {
+            for (Button button : row) {
+                button.setBounds(x, y, buttonWidth, buttonHeight);
+                button.addActionListener(this);
+                frame.add(button);
+                x += buttonWidth + gap;
+            }
+            x = 50;
+            y += buttonHeight + gap;
+        }
+        
         label1.setBounds(50, 100, 100, 20);
         label2.setBounds(50, 140, 100, 20);
         label3.setBounds(50, 180, 100, 20);
@@ -39,38 +60,6 @@ public class SimpleCalculator implements ActionListener
         num2.setBounds(200, 140, 100, 20);
         result.setBounds(200, 180, 100, 20);
 
-        plus.setBounds(50, 250, 50, 20);
-        minus.setBounds(110, 250, 50, 20);
-        times.setBounds(170, 250, 50, 20);
-        divide.setBounds(230, 250, 50, 20);
-        cancel.setBounds(290, 250, 50, 20);
-
-        pow.setBounds(50, 290, 50, 20);
-        root.setBounds(110, 290, 50, 20);
-        log.setBounds(170, 290, 50, 20);
-        gcd.setBounds(230, 290, 50, 20);
-        lcm.setBounds(290, 290, 50, 20);
-
-        mod.setBounds(50, 330, 50, 20);
-        nPr.setBounds(110, 330, 50, 20);
-        nCr.setBounds(170, 330, 50, 20);
-
-        plus.addActionListener(this);
-        minus.addActionListener(this);
-        times.addActionListener(this);
-        divide.addActionListener(this);
-        cancel.addActionListener(this);
-
-        pow.addActionListener(this);
-        root.addActionListener(this);
-        log.addActionListener(this);
-        gcd.addActionListener(this);
-        lcm.addActionListener(this);
-
-        mod.addActionListener(this);
-        nPr.addActionListener(this);
-        nCr.addActionListener(this);
-
         frame.add(label1);
         frame.add(label2);
         frame.add(label3);
@@ -78,30 +67,25 @@ public class SimpleCalculator implements ActionListener
         frame.add(num1);
         frame.add(num2);
         frame.add(result);
-
-        frame.add(plus);
-        frame.add(minus);
-        frame.add(times);
-        frame.add(divide);
-        frame.add(cancel);
-
-        frame.add(pow);
-        frame.add(root);
-        frame.add(log);
-        frame.add(gcd);
-        frame.add(lcm);
-
-        frame.add(mod);
-        frame.add(nPr);
-        frame.add(nCr);
-
+        
+        frame.addWindowListener(
+            new WindowAdapter() {
+                public void windowClosed(WindowEvent e) {
+                    System.exit(0);
+                }
+            }
+        );
+        
+        frame.setBackground(new Color(200, 200, 200));
         frame.setLayout(null);
         frame.setSize(400, 350);
         frame.setVisible(true);
     }
 
-    public int exit() {
-        System.exit(0);
+    private int reset() {
+        num1.setText("");
+        num2.setText("");
+        result.setText("");
         return 0;
     }
 
@@ -137,12 +121,17 @@ public class SimpleCalculator implements ActionListener
 
     public void actionPerformed(ActionEvent e) {
         try {
+            var src = e.getSource();
+            if (src == resetButton) {
+                reset();
+                return;
+            }
+            
             BigDecimal a = new BigDecimal(num1.getText());
             BigDecimal b = new BigDecimal(num2.getText());
             double a_doub = a.doubleValue();
             double b_doub = b.doubleValue();
 
-            var src = e.getSource();
             result.setText(String.valueOf(
                 src == plus ? a.add(b)
                 : src == minus ? a.subtract(b)
@@ -156,7 +145,7 @@ public class SimpleCalculator implements ActionListener
                 : src == mod ? a_doub % b_doub
                 : src == nPr ? permutations(a_doub, b_doub)
                 : src == nCr ? combinations(a_doub, b_doub)
-                : exit()
+                : ""
             ));
         } catch(Exception err) {
             result.setText("Syntax Error");
