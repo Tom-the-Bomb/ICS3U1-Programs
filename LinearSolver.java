@@ -4,7 +4,7 @@ import java.util.Scanner;
 class LinearSolver {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static double input(String name) {
+    protected static double input(String name) {
         System.out.printf("%s: ", name);
         return scanner.nextDouble();
     }

@@ -4,6 +4,7 @@ import javax.swing.*;
 public class HouseDraw extends Canvas {
     private static int width = 1518;
     private static int height = 850;
+
     public static void main(String[] args) {
         HouseDraw comp = new HouseDraw();
         JFrame frame = new JFrame("House");
@@ -17,7 +18,6 @@ public class HouseDraw extends Canvas {
     }
 
     public void paint(Graphics g) {
-
         Font font = new Font("Arial", Font.BOLD, 40);
         g.setFont(font);
         g.setColor(Color.black);

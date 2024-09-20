@@ -28,13 +28,13 @@ public class SimpleCalculator implements ActionListener {
     Button mod = new Button("mod");
     Button nPr = new Button("nPr");
     Button nCr = new Button("nCr");
-    
+
     Button[][] buttons = {
         {plus, minus, times, divide, resetButton},
         {pow, root, log, gcd, lcm},
         {mod, nPr, nCr},
     };
-    
+
     static final int buttonWidth = 60;
     static final int buttonHeight = 20;
     static final int gap = 10;
@@ -51,7 +51,7 @@ public class SimpleCalculator implements ActionListener {
             x = 50;
             y += buttonHeight + gap;
         }
-        
+
         label1.setBounds(50, 100, 100, 20);
         label2.setBounds(50, 140, 100, 20);
         label3.setBounds(50, 180, 100, 20);
@@ -67,7 +67,7 @@ public class SimpleCalculator implements ActionListener {
         frame.add(num1);
         frame.add(num2);
         frame.add(result);
-        
+
         frame.addWindowListener(
             new WindowAdapter() {
                 public void windowClosed(WindowEvent e) {
@@ -75,7 +75,7 @@ public class SimpleCalculator implements ActionListener {
                 }
             }
         );
-        
+
         frame.setBackground(new Color(200, 200, 200));
         frame.setLayout(null);
         frame.setSize(400, 350);
@@ -126,7 +126,7 @@ public class SimpleCalculator implements ActionListener {
                 reset();
                 return;
             }
-            
+
             BigDecimal a = new BigDecimal(num1.getText());
             BigDecimal b = new BigDecimal(num2.getText());
             double a_doub = a.doubleValue();
